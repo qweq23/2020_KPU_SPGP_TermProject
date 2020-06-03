@@ -109,7 +109,7 @@
                                 </state>
                                 <connections>
                                     <action selector="searchLibrary:" destination="EgN-l2-Iks" eventType="touchUpInside" id="8rk-bC-lbn"/>
-                                    <segue destination="Z9Z-4g-F3H" kind="show" id="iFt-8K-3Bm"/>
+                                    <segue destination="Z9Z-4g-F3H" kind="show" identifier="LibraryTable" id="iFt-8K-3Bm"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -159,7 +159,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="K62-wr-xTg" kind="show" id="qyW-uZ-Oo2"/>
+                                    <segue destination="K62-wr-xTg" kind="show" identifier="LibraryDetail" id="qyW-uZ-Oo2"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -172,7 +172,7 @@
                     <navigationItem key="navigationItem" id="fsO-lu-sxy">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="search" id="CNP-fw-JOT">
                             <connections>
-                                <segue destination="SRe-2a-fk4" kind="show" id="Q9P-9y-uA6"/>
+                                <segue destination="SRe-2a-fk4" kind="show" identifier="LibraryMap" id="Q9P-9y-uA6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

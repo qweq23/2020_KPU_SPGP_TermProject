@@ -11,13 +11,21 @@ import UIKit
 class LibraryTableViewController: UITableViewController, XMLParserDelegate {
     
     var parser = XMLParser()
+    var search_area: String = ""
     var librarys : [Library] = []
     var element = NSString()
     
     var library_name = NSMutableString()
     var road_name_addr = NSMutableString()
     
-    var url = "https://openapi.gg.go.kr/Tbggibllbrm?KEY=4b8be84e2f8342d8a46f4cf8e07caf2b&pSize=5"
+    var url = "https://openapi.gg.go.kr/Library?KEY=4b8be84e2f8342d8a46f4cf8e07caf2b&SIGUN_NM="
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // 이 세그웨이가 해당 뷰 컨트롤러로 이동할 때 호출됨
+        print(segue.identifier!)
+        
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +39,11 @@ class LibraryTableViewController: UITableViewController, XMLParserDelegate {
     }
     
     func beginParsing() {
-        librarys = []
-        parser = XMLParser(contentsOf: URL(string: url)!)!
+        librarys.removeAll()
+        url += search_area
+        print(url)
+        let encoded_url = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        parser = XMLParser(contentsOf: URL(string: encoded_url)!)!
         
         parser.delegate = self
         parser.parse()

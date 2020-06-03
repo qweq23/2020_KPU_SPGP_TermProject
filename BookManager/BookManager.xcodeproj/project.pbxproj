@@ -72,6 +72,7 @@
 		A1075B64247D5F9B00AAC855 /* BookManager */ = {
 			isa = PBXGroup;
 			children = (
+				A1E572C524869FE200AAD7B4 /* Library */,
 				A1075B65247D5F9B00AAC855 /* AppDelegate.swift */,
 				A1075B67247D5F9B00AAC855 /* SceneDelegate.swift */,
 				A1075B69247D5F9B00AAC855 /* ViewController.swift */,
@@ -82,13 +83,20 @@
 				A13EB8A8247EBE8100BC5512 /* BookDetailViewController.swift */,
 				A13EB8AA247EBEAC00BC5512 /* SearchBookDetailViewController.swift */,
 				A1B7C905247F6BC30064B073 /* BookcaseTableViewController.swift */,
+			);
+			path = BookManager;
+			sourceTree = "<group>";
+		};
+		A1E572C524869FE200AAD7B4 /* Library */ = {
+			isa = PBXGroup;
+			children = (
 				A1E8C81824837C5E00D241E0 /* LibrarySearchViewController.swift */,
 				A1E8C81A24837CDD00D241E0 /* LibraryTableViewController.swift */,
 				A1E8C81C24837D1400D241E0 /* LibraryDetailViewController.swift */,
 				A1E8C81E24837D5300D241E0 /* LibraryMapViewController.swift */,
 				A1E8C8202483983C00D241E0 /* Library.swift */,
 			);
-			path = BookManager;
+			path = Library;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
