@@ -14,17 +14,26 @@ class LibraryTableViewController: UITableViewController, XMLParserDelegate {
     var search_area: String = ""
     var librarys : [Library] = []
     var element = NSString()
-    
-    var library_name = NSMutableString()
+
+    var lib_name = NSMutableString()
+    var lib_type = NSMutableString()
+    var close_de = NSMutableString()
+    var begin_tm = NSMutableString()
+    var end_tm = NSMutableString()
+    var seat_cnt = NSMutableString()
+    var book_cnt = NSMutableString()
+    var telno = NSMutableString()
+    var hmpg_addr = NSMutableString()
+    var num_addr = NSMutableString()
     var road_name_addr = NSMutableString()
+    var logt = NSMutableString()
+    var lat = NSMutableString()
     
     var url = "https://openapi.gg.go.kr/Library?KEY=4b8be84e2f8342d8a46f4cf8e07caf2b&SIGUN_NM="
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 이 세그웨이가 해당 뷰 컨트롤러로 이동할 때 호출됨
         print(segue.identifier!)
-        
-        
     }
 
     override func viewDidLoad() {
@@ -40,9 +49,10 @@ class LibraryTableViewController: UITableViewController, XMLParserDelegate {
     
     func beginParsing() {
         librarys.removeAll()
+        
         url += search_area
-        print(url)
         let encoded_url = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
         parser = XMLParser(contentsOf: URL(string: encoded_url)!)!
         
         parser.delegate = self
@@ -55,23 +65,53 @@ class LibraryTableViewController: UITableViewController, XMLParserDelegate {
         element = elementName as NSString
         
         if element.isEqual(to: "row") {
-            library_name = ""
+            lib_name = ""
+            lib_type = ""
+            close_de = ""
+            begin_tm = ""
+            end_tm = ""
+            seat_cnt = ""
+            book_cnt = ""
+            telno = ""
+            hmpg_addr = ""
+            num_addr = ""
             road_name_addr = ""
+            logt = ""
+            lat = ""
         }
     }
     
     // 데이터 가져오기
     func parser(_ parser: XMLParser, foundCharacters string: String)
     {
-        // 딕셔너리 형태로 바꿨으면...
-        if element.isEqual(to: "LIBRRY_NM") {
-            // 여기서 받는 string은 정보의 일부분일 수 있으므로 축적하여 저장해야 한다!!
-            library_name.append(string)
-        }
-        if element.isEqual(to: "REFINE_ROADNM_ADDR") {
-            road_name_addr.append(string)
-        }
 
+        if element.isEqual(to: "LIBRRY_NM") {
+            lib_name.append(string)
+        } else if element.isEqual(to: "LIBRRY_TYPE_NM") {
+            lib_type.append(string)
+        } else if element.isEqual(to: "CLOSE_DE_INFO") {
+            close_de.append(string)
+        } else if element.isEqual(to: "OPERT_BEGIN_TM") {
+            begin_tm.append(string)
+        } else if element.isEqual(to: "OPERT_END_TM") {
+            end_tm.append(string)
+        } else if element.isEqual(to: "READ_SEAT_CNT") {
+            seat_cnt.append(string)
+        } else if element.isEqual(to: "BOOK_DATA_CNT") {
+            book_cnt.append(string)
+        } else if element.isEqual(to: "LIBRRY_TELNO") {
+            telno.append(string)
+        } else if element.isEqual(to: "HMPG_ADDR") {
+            hmpg_addr.append(string)
+        } else if element.isEqual(to: "REFINE_LOTNO_ADDR") {
+            num_addr.append(string)
+        } else if element.isEqual(to: "REFINE_ROADNM_ADDR") {
+            road_name_addr.append(string)
+        } else if element.isEqual(to: "REFINE_WGS84_LOGT") {
+            logt.append(string)
+        } else if element.isEqual(to: "REFINE_WGS84_LAT") {
+            lat.append(string)
+        }
     }
     
     // 라이브러리들에 추가하기
@@ -80,8 +120,23 @@ class LibraryTableViewController: UITableViewController, XMLParserDelegate {
 
         if (elementName as NSString).isEqual(to: "row") {
 
-            let library = Library(librry_nm: library_name as String, roadnm_addr: road_name_addr as String)
+            let library = Library(
+                librry_nm: lib_name as String,
+                libtype: lib_type as String,
+                close_de: close_de as String,
+                open_tm: begin_tm as String,
+                end_tm: end_tm as String,
+                seat_cnt: seat_cnt as String,
+                book_cnt: book_cnt as String,
+                telno: telno as String,
+                hmpg_addr: hmpg_addr as String,
+                lotno_addr: logt as String,
+                roadnm_addr: road_name_addr as String,
+                lat: lat as String,
+                logt: logt as String
+            )
             librarys.append(library)
+
         }
     }
 

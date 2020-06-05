@@ -9,56 +9,48 @@
 import Foundation
 
 class Library {
-    var SIGUN_NM: String
     var LIBRRY_NM: String
+    var LIBRRY_TYPE_NM: String
+    var CLOSE_DE_INFO: String
+    var OPERT_BEGIN_TM: String
+    var OPERT_END_TM: String       // 자료실 개방 시간
+    var READ_SEAT_CNT: String       // 자료실 휴무일
+    var BOOK_DATA_CNT: String         // 국내도서 자료수
+    var LIBRRY_TELNO: String
     var HMPG_ADDR: String
     var REFINE_LOTNO_ADDR: String           // 지번 주소
     var REFINE_ROADNM_ADDR: String          // 도로명 주소
-    var RECSROOM_OPEN_TM_INFO: String       // 자료실 개방 시간
-    var RECSROOM_REST_DE_INFO: String       // 자료실 휴무일
-    var DMSTC_BOOK_DATA_CNT: String         // 국내도서 자료수
     var REFINE_WGS84_LAT: String            // 위도
     var REFINE_WGS84_LOGT: String           // 경도
     
-    init (sigun_nm: String = "", librry_nm: String = "", hmpg_addr: String = "",
-          lotno_addr: String = "", roadnm_addr: String = "", open_tm: String = "", rest_de: String = "",
-          book_cnt: String = "", lat: String = "", logt: String = "") {
-        self.SIGUN_NM = sigun_nm
+    init (
+        librry_nm: String = "",
+        libtype: String = "",
+        close_de: String = "",
+        open_tm: String = "",
+        end_tm: String = "",
+        seat_cnt: String = "",
+        book_cnt: String = "",
+        telno: String = "",
+        hmpg_addr: String = "",
+        lotno_addr: String = "",
+        roadnm_addr: String = "",
+        lat: String = "",
+        logt: String = "")
+    {
         self.LIBRRY_NM = librry_nm
+        self.LIBRRY_TYPE_NM = librry_nm
+        self.CLOSE_DE_INFO = librry_nm
+        self.OPERT_BEGIN_TM = librry_nm
+        self.OPERT_END_TM = librry_nm
+        self.READ_SEAT_CNT = librry_nm
+        self.BOOK_DATA_CNT = librry_nm
+        self.LIBRRY_TELNO = librry_nm
         self.HMPG_ADDR = hmpg_addr
         self.REFINE_LOTNO_ADDR = lotno_addr
         self.REFINE_ROADNM_ADDR = roadnm_addr
-        self.RECSROOM_OPEN_TM_INFO = open_tm
-        self.RECSROOM_REST_DE_INFO = rest_de
-        self.DMSTC_BOOK_DATA_CNT = book_cnt
         self.REFINE_WGS84_LAT = lat
         self.REFINE_WGS84_LOGT = logt
     }
     
-    // for test
-    init (librry_nm: String) {
-        self.SIGUN_NM = ""
-        self.LIBRRY_NM = librry_nm
-        self.HMPG_ADDR = ""
-        self.REFINE_LOTNO_ADDR = ""
-        self.REFINE_ROADNM_ADDR = ""
-        self.RECSROOM_OPEN_TM_INFO = ""
-        self.RECSROOM_REST_DE_INFO = ""
-        self.DMSTC_BOOK_DATA_CNT = ""
-        self.REFINE_WGS84_LAT = ""
-        self.REFINE_WGS84_LOGT = ""
-    }
-    
-    init () {
-        self.SIGUN_NM = ""
-        self.LIBRRY_NM = ""
-        self.HMPG_ADDR = ""
-        self.REFINE_LOTNO_ADDR = ""
-        self.REFINE_ROADNM_ADDR = ""
-        self.RECSROOM_OPEN_TM_INFO = ""
-        self.RECSROOM_REST_DE_INFO = ""
-        self.DMSTC_BOOK_DATA_CNT = ""
-        self.REFINE_WGS84_LAT = ""
-        self.REFINE_WGS84_LOGT = ""
-    }
 }

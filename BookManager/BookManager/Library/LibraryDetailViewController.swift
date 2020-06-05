@@ -9,6 +9,8 @@
 import UIKit
 
 class LibraryDetailViewController: UIViewController {
+    
+    var library = Library()
 
     override func viewDidLoad() {
         super.viewDidLoad()
