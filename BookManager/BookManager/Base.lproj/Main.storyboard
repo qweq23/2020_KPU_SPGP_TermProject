@@ -248,6 +248,9 @@
                         <viewLayoutGuide key="safeArea" id="MsE-WC-gTI"/>
                     </view>
                     <navigationItem key="navigationItem" id="Brc-qt-SMu"/>
+                    <connections>
+                        <outlet property="mapView" destination="5Ld-pS-b8W" id="Oig-36-EZl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uC5-mK-FiW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

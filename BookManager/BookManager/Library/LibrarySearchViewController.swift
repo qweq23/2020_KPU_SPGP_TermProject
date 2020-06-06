@@ -20,7 +20,6 @@ class LibrarySearchViewController: UIViewController, UIPickerViewDelegate, UIPic
        "광명시",
        "광주시",
        "구리시",
-       "군포시",
        "김포시",
        "남양주시",
        "동두천시",

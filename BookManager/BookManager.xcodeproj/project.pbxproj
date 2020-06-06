@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A1019CFE248BDB4B00F6D941 /* LibraryOnMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1019CFD248BDB4B00F6D941 /* LibraryOnMap.swift */; };
 		A1075B66247D5F9B00AAC855 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1075B65247D5F9B00AAC855 /* AppDelegate.swift */; };
 		A1075B68247D5F9B00AAC855 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1075B67247D5F9B00AAC855 /* SceneDelegate.swift */; };
 		A1075B6A247D5F9B00AAC855 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1075B69247D5F9B00AAC855 /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A1019CFD248BDB4B00F6D941 /* LibraryOnMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryOnMap.swift; sourceTree = "<group>"; };
 		A1075B62247D5F9B00AAC855 /* BookManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1075B65247D5F9B00AAC855 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1075B67247D5F9B00AAC855 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				A1E8C81E24837D5300D241E0 /* LibraryMapViewController.swift */,
 				A1D9C486248A8A5E0069C1DA /* LibraryDetailTableViewController.swift */,
 				A1E8C8202483983C00D241E0 /* Library.swift */,
+				A1019CFD248BDB4B00F6D941 /* LibraryOnMap.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 				A1E8C81924837C5E00D241E0 /* LibrarySearchViewController.swift in Sources */,
 				A13EB8A9247EBE8100BC5512 /* BookDetailViewController.swift in Sources */,
 				A1E8C81B24837CDD00D241E0 /* LibraryTableViewController.swift in Sources */,
+				A1019CFE248BDB4B00F6D941 /* LibraryOnMap.swift in Sources */,
 				A1075B68247D5F9B00AAC855 /* SceneDelegate.swift in Sources */,
 				A1E8C8212483983C00D241E0 /* Library.swift in Sources */,
 			);

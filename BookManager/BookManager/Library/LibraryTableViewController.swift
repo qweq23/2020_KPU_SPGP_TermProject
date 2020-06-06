@@ -12,7 +12,7 @@ class LibraryTableViewController: UITableViewController, XMLParserDelegate {
     
     var parser = XMLParser()
     var search_area: String = ""
-    var librarys : [Library] = []
+    var libraries : [Library] = []
     var element = NSString()
 
     var lib_name = NSMutableString()
@@ -36,10 +36,14 @@ class LibraryTableViewController: UITableViewController, XMLParserDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 이 세그웨이가 해당 뷰 컨트롤러로 이동할 때 호출됨
         if segue.identifier == "LibraryDetail" {
-            if let indexPath = tableView.indexPathForSelectedRow{
-                let dst_controller = segue.destination as! LibraryDetailTableViewController
-                dst_controller.library = librarys[indexPath.row]
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let detailController = segue.destination as! LibraryDetailTableViewController
+                detailController.library = libraries[indexPath.row]
             }
+        }
+        if segue.identifier == "LibraryMap" {
+            let mapController = segue.destination as! LibraryMapViewController
+            mapController.libraries = self.libraries
         }
     }
 
@@ -49,7 +53,7 @@ class LibraryTableViewController: UITableViewController, XMLParserDelegate {
     }
     
     func beginParsing() {
-        librarys.removeAll()
+        libraries.removeAll()
         
         url += search_area
         let encoded_url = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -136,7 +140,7 @@ class LibraryTableViewController: UITableViewController, XMLParserDelegate {
                 logt: (logt as String).trimmingCharacters(in: .whitespacesAndNewlines)
             )
             
-            librarys.append(library)
+            libraries.append(library)
 
         }
     }
@@ -149,15 +153,15 @@ class LibraryTableViewController: UITableViewController, XMLParserDelegate {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return librarys.count
+        return libraries.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "libraryCell", for: indexPath)
         
-        cell.textLabel?.text = librarys[indexPath.row].LIBRRY_NM
-        cell.detailTextLabel?.text = librarys[indexPath.row].REFINE_ROADNM_ADDR
+        cell.textLabel?.text = libraries[indexPath.row].LIBRRY_NM
+        cell.detailTextLabel?.text = libraries[indexPath.row].REFINE_ROADNM_ADDR
 
         return cell
     }
