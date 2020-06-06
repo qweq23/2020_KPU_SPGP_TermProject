@@ -31,20 +31,21 @@ class LibraryTableViewController: UITableViewController, XMLParserDelegate {
     
     var url = "https://openapi.gg.go.kr/Library?KEY=4b8be84e2f8342d8a46f4cf8e07caf2b&SIGUN_NM="
     
+    var cur_index = 0
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // 이 세그웨이가 해당 뷰 컨트롤러로 이동할 때 호출됨
-        print(segue.identifier!)
+        if segue.identifier == "LibraryDetail" {
+            if let indexPath = tableView.indexPathForSelectedRow{
+                let dst_controller = segue.destination as! LibraryDetailTableViewController
+                dst_controller.library = librarys[indexPath.row]
+            }
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         beginParsing()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     func beginParsing() {
@@ -84,7 +85,6 @@ class LibraryTableViewController: UITableViewController, XMLParserDelegate {
     // 데이터 가져오기
     func parser(_ parser: XMLParser, foundCharacters string: String)
     {
-
         if element.isEqual(to: "LIBRRY_NM") {
             lib_name.append(string)
         } else if element.isEqual(to: "LIBRRY_TYPE_NM") {
@@ -121,27 +121,27 @@ class LibraryTableViewController: UITableViewController, XMLParserDelegate {
         if (elementName as NSString).isEqual(to: "row") {
 
             let library = Library(
-                librry_nm: lib_name as String,
-                libtype: lib_type as String,
-                close_de: close_de as String,
-                open_tm: begin_tm as String,
-                end_tm: end_tm as String,
-                seat_cnt: seat_cnt as String,
-                book_cnt: book_cnt as String,
-                telno: telno as String,
-                hmpg_addr: hmpg_addr as String,
-                lotno_addr: logt as String,
-                roadnm_addr: road_name_addr as String,
-                lat: lat as String,
-                logt: logt as String
+                librry_nm: (lib_name as String).trimmingCharacters(in: .whitespacesAndNewlines),
+                libtype: (lib_type as String).trimmingCharacters(in: .whitespacesAndNewlines),
+                close_de: (close_de as String).trimmingCharacters(in: .whitespacesAndNewlines),
+                open_tm: (begin_tm as String).trimmingCharacters(in: .whitespacesAndNewlines),
+                end_tm: (end_tm as String).trimmingCharacters(in: .whitespacesAndNewlines),
+                seat_cnt: (seat_cnt as String).trimmingCharacters(in: .whitespacesAndNewlines),
+                book_cnt: (book_cnt as String).trimmingCharacters(in: .whitespacesAndNewlines),
+                telno: (telno as String).trimmingCharacters(in: .whitespacesAndNewlines),
+                hmpg_addr: (hmpg_addr as String).trimmingCharacters(in: .whitespacesAndNewlines),
+                lotno_addr: (num_addr as String).trimmingCharacters(in: .whitespacesAndNewlines),
+                roadnm_addr: (road_name_addr as String).trimmingCharacters(in: .whitespacesAndNewlines),
+                lat: (lat as String).trimmingCharacters(in: .whitespacesAndNewlines),
+                logt: (logt as String).trimmingCharacters(in: .whitespacesAndNewlines)
             )
+            
             librarys.append(library)
 
         }
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -161,51 +161,5 @@ class LibraryTableViewController: UITableViewController, XMLParserDelegate {
 
         return cell
     }
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

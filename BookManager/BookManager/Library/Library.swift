@@ -13,9 +13,9 @@ class Library {
     var LIBRRY_TYPE_NM: String
     var CLOSE_DE_INFO: String
     var OPERT_BEGIN_TM: String
-    var OPERT_END_TM: String       // 자료실 개방 시간
-    var READ_SEAT_CNT: String       // 자료실 휴무일
-    var BOOK_DATA_CNT: String         // 국내도서 자료수
+    var OPERT_END_TM: String
+    var READ_SEAT_CNT: String
+    var BOOK_DATA_CNT: String
     var LIBRRY_TELNO: String
     var HMPG_ADDR: String
     var REFINE_LOTNO_ADDR: String           // 지번 주소
@@ -39,18 +39,22 @@ class Library {
         logt: String = "")
     {
         self.LIBRRY_NM = librry_nm
-        self.LIBRRY_TYPE_NM = librry_nm
-        self.CLOSE_DE_INFO = librry_nm
-        self.OPERT_BEGIN_TM = librry_nm
-        self.OPERT_END_TM = librry_nm
-        self.READ_SEAT_CNT = librry_nm
-        self.BOOK_DATA_CNT = librry_nm
-        self.LIBRRY_TELNO = librry_nm
+        self.LIBRRY_TYPE_NM = libtype
+        self.CLOSE_DE_INFO = close_de
+        self.OPERT_BEGIN_TM = open_tm
+        self.OPERT_END_TM = end_tm
+        self.READ_SEAT_CNT = seat_cnt
+        self.BOOK_DATA_CNT = book_cnt
+        self.LIBRRY_TELNO = telno
         self.HMPG_ADDR = hmpg_addr
         self.REFINE_LOTNO_ADDR = lotno_addr
         self.REFINE_ROADNM_ADDR = roadnm_addr
         self.REFINE_WGS84_LAT = lat
         self.REFINE_WGS84_LOGT = logt
+    }
+    
+    func print_info( ) {
+        print(LIBRRY_NM)
     }
     
 }
