@@ -50,6 +50,8 @@ class LibraryTableViewController: UITableViewController, XMLParserDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         beginParsing()
+        
+        print(libraries.count)
     }
     
     func beginParsing() {
