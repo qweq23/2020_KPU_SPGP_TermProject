@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BookSearchViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class BookSearchViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var keywordTextField: UITextField!
     @IBOutlet weak var pickerView: UIPickerView!
@@ -20,17 +20,29 @@ class BookSearchViewController: UIViewController, UIPickerViewDelegate, UIPicker
         "출판사"
     ]
     
-
-
+    let catgToQueryVal: [String: String] = [
+        "제목": "d_titl",
+        "저자": "d_auth",
+        "출판사": "d_publ"
+    ]
+    
+    var selectedCatg: String = "제목"
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "BookTable" {
+            if let bookTableVC = segue.destination as? BookSearchTableViewController {
+                bookTableVC.queryVar = catgToQueryVal[selectedCatg]!
+                bookTableVC.queryValue = keywordTextField.text!
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         pickerView.delegate = self
         pickerView.dataSource = self
-        // Do any additional setup after loading the view.
     }
-    
-
 
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -46,11 +58,11 @@ class BookSearchViewController: UIViewController, UIPickerViewDelegate, UIPicker
         return category[row]
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "LibraryTable" {
-            
-        }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        // 피커뷰가 선택되었을 때
+        selectedCatg = category[row]
     }
+
     
     /*
     // MARK: - Navigation

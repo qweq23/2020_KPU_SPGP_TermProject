@@ -19,14 +19,18 @@ class BookSearchTableViewController: UITableViewController, XMLParserDelegate {
     var tmpBook = [NSString: NSMutableString]()
     var books = [Dictionary<NSString,NSMutableString>]()
     
-    func requestAPIToNaver(queryValue: String) {
-          let query: String  = "https://openapi.naver.com/v1/search/book_adv.xml?d_titl=\(queryValue)"
-          let encodedQuery: String = query.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-          let queryURL: URL = URL(string: encodedQuery)!
+    var queryVar = String()
+    var queryValue = String()
+    var image = UIImage()
+    
+    func requestAPIToNaver() {
+        let query: String  = "https://openapi.naver.com/v1/search/book_adv.xml?\(self.queryVar)=\(self.queryValue)&display=30"
+        let encodedQuery: String = query.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        let queryURL: URL = URL(string: encodedQuery)!
          
-          var requestURL = URLRequest(url: queryURL)
-          requestURL.addValue(clientID, forHTTPHeaderField: "X-Naver-Client-Id")
-          requestURL.addValue(clientSecret, forHTTPHeaderField: "X-Naver-Client-Secret")
+        var requestURL = URLRequest(url: queryURL)
+        requestURL.addValue(clientID, forHTTPHeaderField: "X-Naver-Client-Id")
+        requestURL.addValue(clientSecret, forHTTPHeaderField: "X-Naver-Client-Secret")
           
         let task = URLSession.shared.dataTask(with: requestURL) { data, response, error in
             guard error == nil else {
@@ -55,15 +59,32 @@ class BookSearchTableViewController: UITableViewController, XMLParserDelegate {
                 print("파싱 실패")
             }
             
-          }
-          task.resume()
+        }
+        task.resume()
+    }
+    
+    
+    func getPosterImage(index: Int) -> UIImage {
+        guard let imageURL = books[index]["image"] else {
+            return UIImage(named: "noImage")!
+        }
+        if let url = URL(string: imageURL as String) {
+            if let imgData = try? Data(contentsOf: url) {
+                if let image = UIImage(data: imgData) {
+                    return image
+                }
+            }
+        }
+        return UIImage(named: "noImage")!
     }
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         parser.delegate = self
-        requestAPIToNaver(queryValue: "라임")
+        
+        requestAPIToNaver()
     }
 
     // MARK: - Table view data source
@@ -74,17 +95,20 @@ class BookSearchTableViewController: UITableViewController, XMLParserDelegate {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        print("테이블의 개수를 정함, 책의 개수: \(books.count)")
         return books.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath) as! BookTableViewCell
         
-        cell.textLabel?.text = books[indexPath.row]["title"] as String?
-        cell.detailTextLabel?.text = books[indexPath.row]["author"] as String?
-
+        cell.coverImage = getPosterImage(index: indexPath.row)
+        
+        cell.title = books[indexPath.row]["title"]! as String
+        cell.author = books[indexPath.row]["author"]! as String
+        if let publisher = books[indexPath.row]["publisher"] {
+            cell.publisher = publisher as String
+        }
+        
         return cell
     }
     
@@ -97,8 +121,13 @@ class BookSearchTableViewController: UITableViewController, XMLParserDelegate {
         if element.isEqual(to: "item"){
             self.tmpBook = [
                 NSString("title"): NSMutableString(),
+                NSString("link"): NSMutableString(),
+                NSString("image"): NSMutableString(),
                 NSString("author"): NSMutableString(),
+                NSString("price"): NSMutableString(),
                 NSString("publisher"): NSMutableString(),
+                NSString("pubdate"): NSMutableString(),
+                NSString("description"): NSMutableString(),
             ]
         }
     }
@@ -115,7 +144,6 @@ class BookSearchTableViewController: UITableViewController, XMLParserDelegate {
             for (key, value) in tmpBook {
                 tmpBook[key] = value.replacingOccurrences(of: "</b>", with: "").replacingOccurrences(of: "<b>", with: "") as? NSMutableString
             }
-            
             books.append(tmpBook)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
