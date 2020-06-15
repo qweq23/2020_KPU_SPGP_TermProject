@@ -10,8 +10,17 @@ import UIKit
 
 class BookSearchViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
-    @IBOutlet weak var keywordTextField: UITextField!
-    @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var keywordTextField: UITextField! {
+        didSet {
+            keywordTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var pickerView: UIPickerView! {
+        didSet {
+            pickerView.delegate = self
+            pickerView.dataSource = self
+        }
+    }
     
     
     let category: [String] = [
@@ -40,10 +49,19 @@ class BookSearchViewController: UIViewController, UIPickerViewDelegate, UIPicker
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pickerView.delegate = self
-        pickerView.dataSource = self
-    }
 
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // 사용자가 화면 아무곳이나 누르면 키보드를 사라지게 하는 것
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // 엔터키를 누르면 키보드를 화면에서 사라지게 하는 것
+        textField.resignFirstResponder()    // 텍스트 필드 비활성화
+        return true
+    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

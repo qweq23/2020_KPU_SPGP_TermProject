@@ -10,25 +10,26 @@ import UIKit
 
 class SearchBookDetailViewController: UIViewController {
     
+    @IBOutlet weak var coverImageView: UIImageView!
+    var book = Book()
+    
     @IBAction func cancelToSearchBookDetail(segue: UIStoryboardSegue) {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ToEdit" {
+            if let editVC = segue.destination as? EditBookViewController {
+                editVC.book = self.book
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        coverImageView.image = book.image
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

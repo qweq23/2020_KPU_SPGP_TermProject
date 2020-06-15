@@ -9,9 +9,11 @@
 import UIKit
 
 class BookcaseTableViewController: UITableViewController {
+    
+    var myBooks: [Book] = []
 
     @IBAction func goToMain(segue: UIStoryboardSegue) {
-        
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -33,18 +35,22 @@ class BookcaseTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return myBooks.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath) as! BookTableViewCell
+        
+        cell.coverImage = myBooks[indexPath.row].image
+        
+        cell.title = myBooks[indexPath.row].title
+        cell.author = myBooks[indexPath.row].author
+        cell.publisher = myBooks[indexPath.row].publisher
+        
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

@@ -54,7 +54,7 @@ class BookSearchTableViewController: UITableViewController, XMLParserDelegate {
                 // requestAPIToNaver 이 함수가 불렸다고 해서 바로 파싱하지 않음;;
                 // 잘은 모르겠지만 네트워크 요청 때문이라고 생각함
                 // 파싱이 끝난 데이터를 가지고 뭔가를 하고 싶다면 여기서 해라
-                print(self.books)
+                // print(self.books)
             } else {
                 print("파싱 실패")
             }
@@ -76,6 +76,28 @@ class BookSearchTableViewController: UITableViewController, XMLParserDelegate {
             }
         }
         return UIImage(named: "noImage")!
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "BookDetail" {
+            if let detailVC = segue.destination as? SearchBookDetailViewController {
+                if let indexPath = tableView.indexPathForSelectedRow {
+                    let book = books[indexPath.row]
+
+                    detailVC.book = Book(title: book["title"]! as String,
+                                         link: book["link"]! as String,
+                                         image: getPosterImage(index: indexPath.row),
+                                         author: (book["author"] ?? "") as String,
+                                         publisher: (book["publisher"] ?? "") as String,
+                                         pubdate: (book["pubdate"] ?? "") as String,
+                                         price: (book["price"] ?? "") as String,
+                                         description: (book["description"] ?? "") as String)
+                    
+                }
+            }
+        }
+        
+        
     }
 
 
