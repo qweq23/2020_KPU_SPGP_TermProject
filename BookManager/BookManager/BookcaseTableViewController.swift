@@ -11,6 +11,7 @@ import UIKit
 class BookcaseTableViewController: UITableViewController {
     
     var myBooks: [Book] = []
+    let bookManager = BookManager()
 
     @IBAction func goToMain(segue: UIStoryboardSegue) {
         tableView.reloadData()
@@ -19,11 +20,7 @@ class BookcaseTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        bookManager.loadFromFile()
     }
 
     // MARK: - Table view data source
@@ -35,18 +32,24 @@ class BookcaseTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return myBooks.count
+        return bookManager.books.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath) as! BookTableViewCell
         
-        cell.coverImage = myBooks[indexPath.row].image
+//        cell.coverImage = myBooks[indexPath.row].image
+//
+//        cell.title = myBooks[indexPath.row].title
+//        cell.author = myBooks[indexPath.row].author
+//        cell.publisher = myBooks[indexPath.row].publisher
         
-        cell.title = myBooks[indexPath.row].title
-        cell.author = myBooks[indexPath.row].author
-        cell.publisher = myBooks[indexPath.row].publisher
+        cell.coverImage = bookManager.books[indexPath.row].image
+        
+        cell.title = bookManager.books[indexPath.row].title
+        cell.author = bookManager.books[indexPath.row].author
+        cell.publisher = bookManager.books[indexPath.row].publisher
         
         return cell
     }

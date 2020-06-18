@@ -9,7 +9,8 @@
 import UIKit
 import Foundation
 
-class Book {
+class Book: NSObject, NSCoding {
+    
     var title: String
     var link: String
     var image: UIImage
@@ -17,10 +18,38 @@ class Book {
     var publisher: String
     var pubdate: String
     var price: String
-    var description: String
+    var dscr: String
     
     var userDate = String()
     var userText = String()
+    
+    func encode(with coder: NSCoder) {
+        coder.encode(title, forKey: "title")
+        coder.encode(link, forKey: "link")
+        coder.encode(image, forKey: "image")
+        coder.encode(author, forKey: "author")
+        coder.encode(publisher, forKey: "publisher")
+        coder.encode(pubdate, forKey: "pubdate")
+        coder.encode(price, forKey: "price")
+        coder.encode(description, forKey: "description")
+
+        coder.encode(userDate, forKey: "userDate")
+        coder.encode(userText, forKey: "userText")
+    }
+    
+    required init?(coder: NSCoder) {
+        title = coder.decodeObject(forKey: "title") as! String
+        link = coder.decodeObject(forKey: "link") as! String
+        image = coder.decodeObject(forKey: "image") as! UIImage
+        author = coder.decodeObject(forKey: "author") as! String
+        publisher = coder.decodeObject(forKey: "publisher") as! String
+        pubdate = coder.decodeObject(forKey: "pubdate") as! String
+        price = coder.decodeObject(forKey: "price") as! String
+        dscr = coder.decodeObject(forKey: "description") as! String
+        
+        userDate = coder.decodeObject(forKey: "userDate") as! String
+        userText = coder.decodeObject(forKey: "userText") as! String
+    }
     
     init(title: String = "", link: String = "", image: UIImage = UIImage(named: "noImage")!, author: String = "",
          publisher: String = "", pubdate: String = "", price: String = "", description: String = "") {
@@ -31,6 +60,6 @@ class Book {
         self.publisher = publisher
         self.price = price
         self.pubdate = pubdate
-        self.description = description
+        self.dscr = description
     }
 }
