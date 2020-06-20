@@ -11,6 +11,12 @@ import UIKit
 class SearchBookDetailViewController: UIViewController {
     
     @IBOutlet weak var coverImageView: UIImageView!
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var publisherLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
     var book = Book()
     
     @IBAction func cancelToSearchBookDetail(segue: UIStoryboardSegue) {
@@ -28,7 +34,13 @@ class SearchBookDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         coverImageView.image = book.image
-        // Do any additional setup after loading the view.
+        
+        titleLabel.text = book.title
+        authorLabel.text = book.author
+        publisherLabel.text = book.publisher
+        descriptionLabel.text = book.dscr
+        
+        book.printInfo()
     }
     
 

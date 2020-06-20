@@ -28,7 +28,6 @@ class EditBookViewController: UIViewController, UITextFieldDelegate {
             book.userText = commentTextView.text
             
             if let mainVC = segue.destination as? BookcaseTableViewController {
-                mainVC.myBooks.append(book)
                 mainVC.bookManager.addBook(book: book)
                 
             }

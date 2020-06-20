@@ -89,8 +89,6 @@ class BookSearchTableViewController: UITableViewController, XMLParserDelegate {
                                          image: getPosterImage(index: indexPath.row),
                                          author: (book["author"] ?? "") as String,
                                          publisher: (book["publisher"] ?? "") as String,
-                                         pubdate: (book["pubdate"] ?? "") as String,
-                                         price: (book["price"] ?? "") as String,
                                          description: (book["description"] ?? "") as String)
                     
                 }
@@ -164,9 +162,10 @@ class BookSearchTableViewController: UITableViewController, XMLParserDelegate {
                     namespaceURI: String?, qualifiedName qName: String?) {
         if (elementName as NSString).isEqual(to: "item") {
             for (key, value) in tmpBook {
-                tmpBook[key] = value.replacingOccurrences(of: "</b>", with: "").replacingOccurrences(of: "<b>", with: "") as? NSMutableString
+                tmpBook[key] = value.replacingOccurrences(of: "</b>", with: "").replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "&#x0D;", with: "") as? NSMutableString
             }
             books.append(tmpBook)
+            print(tmpBook)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }

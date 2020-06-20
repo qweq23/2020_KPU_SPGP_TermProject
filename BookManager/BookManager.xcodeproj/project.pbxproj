@@ -88,6 +88,7 @@
 		A1075B64247D5F9B00AAC855 /* BookManager */ = {
 			isa = PBXGroup;
 			children = (
+				A1FCC774249E477F00C3E9F1 /* Book Case */,
 				A1C2755B248FD465001BB6C5 /* Book Search */,
 				A1E572C524869FE200AAD7B4 /* Library */,
 				A1075B65247D5F9B00AAC855 /* AppDelegate.swift */,
@@ -97,10 +98,7 @@
 				A1075B6E247D5F9C00AAC855 /* Assets.xcassets */,
 				A1075B70247D5F9C00AAC855 /* LaunchScreen.storyboard */,
 				A1075B73247D5F9C00AAC855 /* Info.plist */,
-				A13EB8A8247EBE8100BC5512 /* BookDetailViewController.swift */,
-				A1B7C905247F6BC30064B073 /* BookcaseTableViewController.swift */,
 				A1F909D9249A8228001ED0BC /* tmp.swift */,
-				A10393BC249B76DB002652D5 /* BookManager.swift */,
 			);
 			path = BookManager;
 			sourceTree = "<group>";
@@ -112,7 +110,6 @@
 				A1C2755C248FD4CB001BB6C5 /* BookSearchViewController.swift */,
 				A1C2755E248FD85B001BB6C5 /* BookSearchTableViewController.swift */,
 				A1C0B72C24915339001BFC3A /* BookTableViewCell.swift */,
-				A1BEFFCA2491F370008F1A5F /* Book.swift */,
 				A1BEFFD0249218F8008F1A5F /* EditBookViewController.swift */,
 			);
 			path = "Book Search";
@@ -129,6 +126,17 @@
 				A1019CFD248BDB4B00F6D941 /* LibraryOnMap.swift */,
 			);
 			path = Library;
+			sourceTree = "<group>";
+		};
+		A1FCC774249E477F00C3E9F1 /* Book Case */ = {
+			isa = PBXGroup;
+			children = (
+				A1BEFFCA2491F370008F1A5F /* Book.swift */,
+				A13EB8A8247EBE8100BC5512 /* BookDetailViewController.swift */,
+				A10393BC249B76DB002652D5 /* BookManager.swift */,
+				A1B7C905247F6BC30064B073 /* BookcaseTableViewController.swift */,
+			);
+			path = "Book Case";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

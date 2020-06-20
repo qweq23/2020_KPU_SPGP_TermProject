@@ -10,7 +10,6 @@ import UIKit
 
 class BookcaseTableViewController: UITableViewController {
     
-    var myBooks: [Book] = []
     let bookManager = BookManager()
 
     @IBAction func goToMain(segue: UIStoryboardSegue) {
@@ -20,13 +19,12 @@ class BookcaseTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bookManager.loadFromFile()
+         bookManager.loadFromFile()
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
@@ -38,12 +36,6 @@ class BookcaseTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath) as! BookTableViewCell
-        
-//        cell.coverImage = myBooks[indexPath.row].image
-//
-//        cell.title = myBooks[indexPath.row].title
-//        cell.author = myBooks[indexPath.row].author
-//        cell.publisher = myBooks[indexPath.row].publisher
         
         cell.coverImage = bookManager.books[indexPath.row].image
         
