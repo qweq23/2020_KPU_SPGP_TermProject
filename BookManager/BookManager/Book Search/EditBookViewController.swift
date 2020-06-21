@@ -36,7 +36,7 @@ class EditBookViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        formmater.dateFormat = "yyyyMMdd"
+        formmater.dateFormat = "yyyy.MM.dd"
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

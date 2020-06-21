@@ -94,8 +94,6 @@ class BookSearchTableViewController: UITableViewController, XMLParserDelegate {
                 }
             }
         }
-        
-        
     }
 
 

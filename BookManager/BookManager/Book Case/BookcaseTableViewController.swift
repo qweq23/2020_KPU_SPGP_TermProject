@@ -16,10 +16,20 @@ class BookcaseTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "BookDetail" {
+            if let detailVC = segue.destination as? BookDetailViewController {
+                if let indexPath = tableView.indexPathForSelectedRow {
+                    detailVC.book = bookManager.books[indexPath.row]
+                }
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-         bookManager.loadFromFile()
+        bookManager.loadFromFile()
     }
 
     // MARK: - Table view data source
