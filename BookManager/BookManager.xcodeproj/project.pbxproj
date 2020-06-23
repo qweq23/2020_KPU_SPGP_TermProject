@@ -28,6 +28,8 @@
 		A1E8C81B24837CDD00D241E0 /* LibraryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E8C81A24837CDD00D241E0 /* LibraryTableViewController.swift */; };
 		A1E8C81F24837D5300D241E0 /* LibraryMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E8C81E24837D5300D241E0 /* LibraryMapViewController.swift */; };
 		A1E8C8212483983C00D241E0 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E8C8202483983C00D241E0 /* Library.swift */; };
+		A1F1B93B24A12B91006B32DD /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F1B93A24A12B91006B32DD /* StatisticsViewController.swift */; };
+		A1F1B93D24A12CC2006B32DD /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F1B93C24A12CC2006B32DD /* GraphView.swift */; };
 		A1F909DA249A8228001ED0BC /* tmp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F909D9249A8228001ED0BC /* tmp.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +57,8 @@
 		A1E8C81A24837CDD00D241E0 /* LibraryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTableViewController.swift; sourceTree = "<group>"; };
 		A1E8C81E24837D5300D241E0 /* LibraryMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryMapViewController.swift; sourceTree = "<group>"; };
 		A1E8C8202483983C00D241E0 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
+		A1F1B93A24A12B91006B32DD /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		A1F1B93C24A12CC2006B32DD /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		A1F909D9249A8228001ED0BC /* tmp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tmp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +103,8 @@
 				A1075B70247D5F9C00AAC855 /* LaunchScreen.storyboard */,
 				A1075B73247D5F9C00AAC855 /* Info.plist */,
 				A1F909D9249A8228001ED0BC /* tmp.swift */,
+				A1F1B93A24A12B91006B32DD /* StatisticsViewController.swift */,
+				A1F1B93C24A12CC2006B32DD /* GraphView.swift */,
 			);
 			path = BookManager;
 			sourceTree = "<group>";
@@ -212,6 +218,7 @@
 			files = (
 				A1BEFFCB2491F370008F1A5F /* Book.swift in Sources */,
 				A10393BD249B76DB002652D5 /* BookManager.swift in Sources */,
+				A1F1B93D24A12CC2006B32DD /* GraphView.swift in Sources */,
 				A1D9C487248A8A5E0069C1DA /* LibraryDetailTableViewController.swift in Sources */,
 				A1B7C906247F6BC30064B073 /* BookcaseTableViewController.swift in Sources */,
 				A1BEFFD1249218F8008F1A5F /* EditBookViewController.swift in Sources */,
@@ -221,6 +228,7 @@
 				A1E8C81F24837D5300D241E0 /* LibraryMapViewController.swift in Sources */,
 				A13EB8AB247EBEAC00BC5512 /* SearchBookDetailViewController.swift in Sources */,
 				A1E8C81924837C5E00D241E0 /* LibrarySearchViewController.swift in Sources */,
+				A1F1B93B24A12B91006B32DD /* StatisticsViewController.swift in Sources */,
 				A13EB8A9247EBE8100BC5512 /* BookDetailViewController.swift in Sources */,
 				A1E8C81B24837CDD00D241E0 /* LibraryTableViewController.swift in Sources */,
 				A1019CFE248BDB4B00F6D941 /* LibraryOnMap.swift in Sources */,

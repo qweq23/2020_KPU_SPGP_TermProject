@@ -17,7 +17,7 @@ class BookDetailViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var publisherLabel: UILabel!
-    @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var commentTextView: UITextView!
     
     var book = Book()
     
@@ -37,7 +37,7 @@ class BookDetailViewController: UIViewController {
         titleLabel.text = book.title
         authorLabel.text = book.author
         publisherLabel.text = book.publisher
-        commentLabel.text = book.userText
+        commentTextView.text = book.userText
     }
     
 
