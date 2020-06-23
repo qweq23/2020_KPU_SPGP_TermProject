@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Speech
 
 class BookSearchViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
@@ -37,6 +38,30 @@ class BookSearchViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     var selectedCatg: String = "제목"
     
+    // 음성인식
+    @IBOutlet weak var transcribeButton: UIButton!
+    
+    private let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "ko-KR"))!
+    
+    private var speechRecognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    private var speechRecognitionTask: SFSpeechRecognitionTask?
+    
+    private let audioEngine = AVAudioEngine()
+    
+    @IBAction func startVoice(_ sender: Any) {
+        print("음성인식 시작!")
+        try! startSession()
+    }
+    
+    @IBAction func endVoice(_ sender: Any) {
+        print("음성인식 끝!")
+        if audioEngine.isRunning {
+            audioEngine.stop()
+            speechRecognitionRequest?.endAudio()
+        }
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "BookTable" {
             if let bookTableVC = segue.destination as? BookSearchTableViewController {
@@ -49,7 +74,7 @@ class BookSearchViewController: UIViewController, UIPickerViewDelegate, UIPicker
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        authorizeSR()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -82,6 +107,79 @@ class BookSearchViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
 
     
+    // 음성인식
+    func authorizeSR() {
+        SFSpeechRecognizer.requestAuthorization { authStatus in
+            OperationQueue.main.addOperation {
+                switch authStatus {
+                case .authorized:
+                    self.transcribeButton.isEnabled = true
+                
+                case .denied:
+                    self.transcribeButton.isEnabled = false
+                    self.transcribeButton.setTitle("Speech recognition access denied by user", for: .disabled)
+                    
+                case .restricted:
+                    self.transcribeButton.isEnabled = false
+                    self.transcribeButton.setTitle("Speech recognition restricted on device", for: .disabled)
+                    
+                case .notDetermined:
+                    self.transcribeButton.isEnabled = false
+                    self.transcribeButton.setTitle("Speech recognition not authrized", for: .disabled)
+                @unknown default:
+                    return
+                }
+            }
+        }
+    }
+    
+    func startSession() throws {
+        if let recognitionTask = speechRecognitionTask {
+            recognitionTask.cancel()
+            self.speechRecognitionTask = nil
+        }
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        try audioSession.setCategory(AVAudioSession.Category.record)
+        
+        speechRecognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+        
+        guard let recognitionRequest = speechRecognitionRequest else
+            { fatalError("SFSpeechAudioBufferRecognitionRequest object creation failed") }
+        
+        let inputNode = audioEngine.inputNode
+        
+        recognitionRequest.shouldReportPartialResults = true
+        
+        speechRecognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
+            var finished = false
+            
+            if let result = result {
+                self.keywordTextField.text =
+                    result.bestTranscription.formattedString
+                finished = result.isFinal
+            }
+            
+            if error != nil || finished {
+                self.audioEngine.stop()
+                inputNode.removeTap(onBus: 0)
+                
+                self.speechRecognitionRequest = nil
+                self.speechRecognitionTask = nil
+                
+                self.transcribeButton.isEnabled = true
+            }
+        }
+        
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+            
+            self.speechRecognitionRequest?.append(buffer)
+        }
+        
+        audioEngine.prepare()
+        try audioEngine.start()
+    }
     /*
     // MARK: - Navigation
 
