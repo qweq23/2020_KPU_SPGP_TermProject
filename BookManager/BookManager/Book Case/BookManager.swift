@@ -8,6 +8,8 @@
 
 import Foundation
 
+let bookManager = BookManager()
+
 class BookManager {
     var books: [Book] = []
     var documentsURL: URL

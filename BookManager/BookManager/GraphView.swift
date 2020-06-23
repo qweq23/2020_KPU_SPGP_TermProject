@@ -19,15 +19,20 @@ private struct Constants {
 
 @IBDesignable class GraphView: UIView {
   
-  // 1
-  @IBInspectable var startColor: UIColor = .red
-  @IBInspectable var endColor: UIColor = .green
+    // 1
+    @IBInspectable var startColor: UIColor = .red
+    @IBInspectable var endColor: UIColor = .green
     
     // 여기에 그래프의 데이터를 넣어라
-    var graphPoints = [0, 0, 0, 0, 1, 0]
-
+    var graphPoints = [1, 2, 1, 1, 1, 1]
+    
+    func setData(data: [Int]) {
+        print("값 설정 함")
+        graphPoints = data
+    }
 
     override func draw(_ rect: CGRect) {
+        print("그래프 그림")
         let width = rect.width
         let height = rect.height
         
@@ -36,25 +41,25 @@ private struct Constants {
                           cornerRadii: Constants.cornerRadiusSize)
         path.addClip()
       
-      // 2
-      let context = UIGraphicsGetCurrentContext()!
-      let colors = [startColor.cgColor, endColor.cgColor]
+        // 2
+        let context = UIGraphicsGetCurrentContext()!
+        let colors = [startColor.cgColor, endColor.cgColor]
       
-      // 3
-      let colorSpace = CGColorSpaceCreateDeviceRGB()
+        // 3
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
       
-      // 4
-      let colorLocations: [CGFloat] = [0.0, 1.0]
+        // 4
+        let colorLocations: [CGFloat] = [0.0, 1.0]
       
-      // 5
-      let gradient = CGGradient(colorsSpace: colorSpace,
-                                     colors: colors as CFArray,
+        // 5
+        let gradient = CGGradient(colorsSpace: colorSpace,
+                                  colors: colors as CFArray,
                                   locations: colorLocations)!
       
-      // 6
-      let startPoint = CGPoint.zero
-      let endPoint = CGPoint(x: 0, y: bounds.height)
-      context.drawLinearGradient(gradient,
+        // 6
+        let startPoint = CGPoint.zero
+        let endPoint = CGPoint(x: 0, y: bounds.height)
+        context.drawLinearGradient(gradient,
                           start: startPoint,
                             end: endPoint,
                         options: [])
@@ -63,9 +68,9 @@ private struct Constants {
         let margin = Constants.margin
         let graphWidth = width - margin * 2 - 4
         let columnXPoint = { (column: Int) -> CGFloat in
-          //Calculate the gap between points
-          let spacing = graphWidth / CGFloat(self.graphPoints.count - 1)
-          return CGFloat(column) * spacing + margin + 2
+            //Calculate the gap between points
+            let spacing = graphWidth / CGFloat(self.graphPoints.count - 1)
+            return CGFloat(column) * spacing + margin + 2
         }
         
         // calculate the y point
@@ -73,9 +78,13 @@ private struct Constants {
         let bottomBorder = Constants.bottomBorder
         let graphHeight = height - topBorder - bottomBorder
         let maxValue = graphPoints.max()!
+
         let columnYPoint = { (graphPoint: Int) -> CGFloat in
-          let y = CGFloat(graphPoint) / CGFloat(maxValue) * graphHeight
-          return graphHeight + topBorder - y // Flip the graph
+            if maxValue == 0 {
+                return graphHeight + topBorder
+            }
+            let y = CGFloat(graphPoint) / CGFloat(maxValue) * graphHeight
+            return graphHeight + topBorder - y // Flip the graph
         }
         
         // draw the line graph

@@ -124,7 +124,12 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3Q-Wk-nF6">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="400"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="book" translatesAutoresizingMaskIntoConstraints="NO" id="ASb-kR-jHG">
+                                                <rect key="frame" x="8" y="8" width="358" height="384"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                        </subviews>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JPz-IK-QoR" customClass="GraphView" customModule="BookManager" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="400"/>
@@ -187,7 +192,6 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstItem="u3Q-Wk-nF6" firstAttribute="leading" secondItem="I1R-BA-1hd" secondAttribute="leading" id="3rW-6p-2ip"/>
@@ -203,19 +207,39 @@
                                     <outletCollection property="gestureRecognizers" destination="GlF-Pe-etN" appends="YES" id="fhW-Tf-g3W"/>
                                 </connections>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020년 상반기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqM-qr-L2p">
+                                <rect key="frame" x="134" y="100" width="146" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="총 0권의 책을 읽으셨습니다!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hGY-M9-zvb">
+                                <rect key="frame" x="57" y="669" width="300" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="zqM-qr-L2p" firstAttribute="leading" secondItem="VVE-fT-7y1" secondAttribute="leading" constant="134" id="7ly-1b-9xv"/>
+                            <constraint firstItem="hGY-M9-zvb" firstAttribute="top" secondItem="I1R-BA-1hd" secondAttribute="bottom" constant="100" id="FPg-hf-H6D"/>
                             <constraint firstItem="VVE-fT-7y1" firstAttribute="bottom" secondItem="I1R-BA-1hd" secondAttribute="bottom" constant="244" id="TND-t8-OA1"/>
                             <constraint firstItem="VVE-fT-7y1" firstAttribute="trailing" secondItem="I1R-BA-1hd" secondAttribute="trailing" constant="20" id="WH3-Jf-DkC"/>
                             <constraint firstItem="I1R-BA-1hd" firstAttribute="leading" secondItem="VVE-fT-7y1" secondAttribute="leading" constant="20" id="X93-C5-rPT"/>
+                            <constraint firstItem="zqM-qr-L2p" firstAttribute="top" secondItem="VVE-fT-7y1" secondAttribute="top" constant="56" id="ZqY-H6-MfX"/>
+                            <constraint firstItem="zqM-qr-L2p" firstAttribute="centerX" secondItem="ZKh-s2-J50" secondAttribute="centerX" id="agZ-YF-Sey"/>
+                            <constraint firstItem="hGY-M9-zvb" firstAttribute="leading" secondItem="VVE-fT-7y1" secondAttribute="leading" constant="57" id="eDa-SL-2V4"/>
+                            <constraint firstItem="VVE-fT-7y1" firstAttribute="trailing" secondItem="zqM-qr-L2p" secondAttribute="trailing" constant="134" id="kGY-hP-8o9"/>
+                            <constraint firstItem="VVE-fT-7y1" firstAttribute="trailing" secondItem="hGY-M9-zvb" secondAttribute="trailing" constant="57" id="tlc-WV-tmK"/>
                             <constraint firstItem="I1R-BA-1hd" firstAttribute="top" secondItem="VVE-fT-7y1" secondAttribute="top" constant="125" id="uoj-iR-BpM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VVE-fT-7y1"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="통계" id="ief-0X-bUE"/>
                     <connections>
+                        <outlet property="bookNumLabel" destination="hGY-M9-zvb" id="4D2-pt-MKU"/>
                         <outlet property="containerView" destination="I1R-BA-1hd" id="RbJ-vY-dQC"/>
                         <outlet property="counterView" destination="u3Q-Wk-nF6" id="IdK-2a-2Ng"/>
                         <outlet property="graphView" destination="JPz-IK-QoR" id="iVX-i0-sYv"/>
@@ -804,6 +828,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="book" width="340" height="340"/>
         <image name="pngflow.com" width="654" height="646"/>
     </resources>
 </document>

@@ -10,7 +10,7 @@ import UIKit
 
 class BookcaseTableViewController: UITableViewController {
     
-    let bookManager = BookManager()
+    // let bookManager = BookManager()
 
     @IBAction func goToMain(segue: UIStoryboardSegue) {
         tableView.reloadData()

@@ -27,10 +27,7 @@ class EditBookViewController: UIViewController, UITextFieldDelegate {
             book.userDate = formmater.string(from: datePicker.date)
             book.userText = commentTextView.text
             
-            if let mainVC = segue.destination as? BookcaseTableViewController {
-                mainVC.bookManager.addBook(book: book)
-                
-            }
+            bookManager.addBook(book: book)
         }
     }
     
