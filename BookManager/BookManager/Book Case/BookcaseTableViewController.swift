@@ -8,9 +8,33 @@
 
 import UIKit
 
-class BookcaseTableViewController: UITableViewController {
+class BookcaseTableViewController: UITableViewController, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        filterContentForSearchText(searchController.searchBar.text!, scope: "All")
+    }
     
-    // let bookManager = BookManager()
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    @IBOutlet var searchFooter: SearchFooter!
+    var filteredBooks = [Book]()
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        filteredBooks = bookManager.books.filter({(book: Book) -> Bool in
+            return book.title.lowercased().contains(searchText.lowercased())
+        })
+        
+        tableView.reloadData()
+    }
+    
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+    
 
     @IBAction func goToMain(segue: UIStoryboardSegue) {
         tableView.reloadData()
@@ -27,10 +51,19 @@ class BookcaseTableViewController: UITableViewController {
         }
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         bookManager.loadFromFile()
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Books"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        tableView.tableFooterView = searchFooter
     }
 
     // MARK: - Table view data source
@@ -41,6 +74,11 @@ class BookcaseTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if isFiltering() {
+            searchFooter.setIsFilteringToShow(filteredItemCount: filteredBooks.count, of: bookManager.books.count)
+            return filteredBooks.count
+        }
+        searchFooter.setNotFiltering()
         return bookManager.books.count
     }
 
@@ -48,11 +86,17 @@ class BookcaseTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath) as! BookTableViewCell
         
-        cell.coverImage = bookManager.books[indexPath.row].image
+        let showedBook: Book
+        if isFiltering() {
+            showedBook = filteredBooks[indexPath.row]
+        } else {
+            showedBook = bookManager.books[indexPath.row]
+        }
         
-        cell.title = bookManager.books[indexPath.row].title
-        cell.author = bookManager.books[indexPath.row].author
-        cell.publisher = bookManager.books[indexPath.row].publisher
+        cell.coverImage = showedBook.image
+        cell.title = showedBook.title
+        cell.author = showedBook.author
+        cell.publisher = showedBook.publisher
         
         return cell
     }
