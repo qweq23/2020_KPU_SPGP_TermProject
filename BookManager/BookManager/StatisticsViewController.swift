@@ -15,10 +15,26 @@ class StatisticsViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var counterView: UIView!
     @IBOutlet weak var graphView: GraphView!
-    
+
     @IBOutlet weak var bookNumLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        if (isGraphViewShowing) {
+          //hide Graph
+          UIView.transition(from: graphView,
+                            to: counterView,
+                            duration: 0.0,
+                            options: [.transitionFlipFromLeft, .showHideTransitionViews],
+                            completion:nil)
+            isGraphViewShowing = !isGraphViewShowing
+        }
+        
         update()
     }
     
@@ -34,7 +50,6 @@ class StatisticsViewController: UIViewController {
             "05": 0,
             "06": 0,
         ]
-        
         
         for book in bookManager.books {
             let date = book.userDate.components(separatedBy: ".")

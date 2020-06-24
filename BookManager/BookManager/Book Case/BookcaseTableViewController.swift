@@ -21,6 +21,7 @@ class BookcaseTableViewController: UITableViewController {
             if let detailVC = segue.destination as? BookDetailViewController {
                 if let indexPath = tableView.indexPathForSelectedRow {
                     detailVC.book = bookManager.books[indexPath.row]
+                    print("원본: ", bookManager.books[indexPath.row])
                 }
             }
         }
