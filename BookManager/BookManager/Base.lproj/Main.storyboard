@@ -237,7 +237,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VVE-fT-7y1"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="통계" id="ief-0X-bUE"/>
+                    <tabBarItem key="tabBarItem" title="통계" image="chart.bar" catalog="system" id="ief-0X-bUE"/>
                     <connections>
                         <outlet property="bookNumLabel" destination="hGY-M9-zvb" id="4D2-pt-MKU"/>
                         <outlet property="containerView" destination="I1R-BA-1hd" id="RbJ-vY-dQC"/>
@@ -340,7 +340,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="fsO-lu-sxy">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="search" id="CNP-fw-JOT">
+                        <barButtonItem key="rightBarButtonItem" image="map" catalog="system" style="plain" id="CNP-fw-JOT">
                             <connections>
                                 <segue destination="SRe-2a-fk4" kind="show" identifier="LibraryMap" id="Q9P-9y-uA6"/>
                             </connections>
@@ -435,32 +435,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ciL-Rc-R91">
-                                <rect key="frame" x="0.0" y="491" width="414" height="216"/>
+                                <rect key="frame" x="20" y="88" width="130" height="150"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kxn-qX-tJx">
-                                <rect key="frame" x="57" y="188" width="300" height="34"/>
+                                <rect key="frame" x="158" y="146" width="236" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnh-NI-R9P">
+                                <rect key="frame" x="50" y="250" width="150" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="  누르는 동안 음성을 인식합니다" image="709d542149d9fd45871aa593cff5fbdb_t">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="endVoice:" destination="orN-B3-8Mj" eventType="touchUpInside" id="IHK-wZ-wiM"/>
+                                    <action selector="startVoice:" destination="orN-B3-8Mj" eventType="touchDown" id="1H6-yy-xN2"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fF7-gW-zVe">
-                                <rect key="frame" x="257" y="260" width="100" height="100"/>
+                                <rect key="frame" x="242" y="250" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="검색" image="pngflow.com">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <segue destination="tMs-jN-aDu" kind="show" identifier="BookTable" id="3Si-OK-P3K"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnh-NI-R9P">
-                                <rect key="frame" x="73" y="260" width="82" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="음성인식 검색"/>
-                                <connections>
-                                    <action selector="endVoice:" destination="orN-B3-8Mj" eventType="touchUpInside" id="IHK-wZ-wiM"/>
-                                    <action selector="startVoice:" destination="orN-B3-8Mj" eventType="touchDown" id="1H6-yy-xN2"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -477,7 +479,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="krc-Wh-vsF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1867" y="-1438"/>
+            <point key="canvasLocation" x="1866.6666666666667" y="-1438.3928571428571"/>
         </scene>
         <!--Book Search Table View Controller-->
         <scene sceneID="0Oo-n4-JD6">
@@ -601,17 +603,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Prw-Gz-MMH">
-                                <rect key="frame" x="294" y="698" width="100" height="100"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="서재로">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="wiu-4L-EKv" kind="show" identifier="ToEdit" id="j8p-Nm-SGS"/>
-                                </connections>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K1a-pt-Hok">
                                 <rect key="frame" x="132" y="138" width="150" height="200"/>
                                 <constraints>
@@ -654,10 +645,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Prw-Gz-MMH">
+                                <rect key="frame" x="266" y="665" width="128" height="128"/>
+                                <state key="normal" image="bookshelf-icon-2">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <segue destination="wiu-4L-EKv" kind="show" identifier="ToEdit" id="j8p-Nm-SGS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="jUS-hd-tzx" firstAttribute="trailing" secondItem="Prw-Gz-MMH" secondAttribute="trailing" constant="20" id="89R-CJ-Yph"/>
                             <constraint firstItem="K1a-pt-Hok" firstAttribute="top" secondItem="jUS-hd-tzx" secondAttribute="top" constant="50" id="Rto-4I-pyL"/>
+                            <constraint firstItem="jUS-hd-tzx" firstAttribute="bottom" secondItem="Prw-Gz-MMH" secondAttribute="bottom" constant="20" id="SBy-X6-Msh"/>
                             <constraint firstItem="K1a-pt-Hok" firstAttribute="centerX" secondItem="r3F-qc-EIQ" secondAttribute="centerX" id="rrF-gb-v9b"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jUS-hd-tzx"/>
@@ -805,7 +807,7 @@
         <scene sceneID="1p6-Cq-wii">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KkO-G4-7af" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="서재" id="uUx-ho-nh9"/>
+                    <tabBarItem key="tabBarItem" title="서재" image="book.circle" catalog="system" id="uUx-ho-nh9"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LY0-i9-2N6">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -824,7 +826,7 @@
         <scene sceneID="aKL-yn-Ynl">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nte-ov-Crw" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="도서관 검색" id="MmT-N4-rvj"/>
+                    <tabBarItem key="tabBarItem" title="도서관 검색" image="magnifyingglass" catalog="system" id="MmT-N4-rvj"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3p4-lm-hx9">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -841,7 +843,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="709d542149d9fd45871aa593cff5fbdb_t" width="453" height="340"/>
         <image name="book" width="340" height="340"/>
+        <image name="book.circle" catalog="system" width="128" height="121"/>
+        <image name="bookshelf-icon-2" width="128" height="128"/>
+        <image name="chart.bar" catalog="system" width="128" height="90"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="map" catalog="system" width="128" height="113"/>
         <image name="pngflow.com" width="654" height="646"/>
     </resources>
 </document>
